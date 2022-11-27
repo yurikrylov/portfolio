@@ -1,13 +1,15 @@
 
 import './App.css';
-import { useState, useEffect } from 'react';
 import { AiOutlinePlus } from 'react-icons/ai';
+import { useState, useEffect } from 'react';
+import { db } from './firebase.ts';
+import { query, collection, onSnapshot, updateDoc, doc, addDoc } from 'firebase/firestore';
 import Todo from './Components/Todo';
-import { db } from './firebase';
-import { query, collection, onSnapshot, updateDoc, doc, addDoc, deleteDoc } from 'firebase/firestore'
-
+import deleteTodo from './features/deleteDoc.tsx';
 
 function App() {
+  const [todos, setTodos] = useState([]);
+  const [input, setInput] = useState('');
   // create todo
   const createToDo = async (e) => {
     e.preventDefault(e)
@@ -33,7 +35,6 @@ function App() {
     })
     return () => unsubscribe()
   }, [])
-
   // update todo 
   const toggleComplete = async (todo) => {
     await updateDoc(doc(db, 'todos', todo.id), {
@@ -41,13 +42,6 @@ function App() {
     })
   }
 
-  // delete todo
-  const deleteTodo = async (id)=>{
-await deleteDoc(doc(db, 'todos',id))
-  }
-
-  const [todos, setTodos] = useState([]);
-  const [input, setInput] = useState('');
   return (
     <div className='bg'>
       <div className='container'>
