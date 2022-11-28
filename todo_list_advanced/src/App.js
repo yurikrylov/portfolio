@@ -5,9 +5,7 @@ import { useState, useEffect } from 'react';
 import { db } from './firebase.ts';
 import { query, collection, onSnapshot } from 'firebase/firestore';
 import TodoElement from './Components/Todo';
-import deleteTodo from './features/deleteDoc.tsx';
 import createToDo from './features/createDoc';
-import toggleComplete from './features/updateDoc';
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -43,8 +41,6 @@ function App() {
             <TodoElement
               key={index}
               todo={todo}
-              toggleComplete={toggleComplete}
-              deleteTodo={deleteTodo}
             />))}
         </ul>
         <p className='count'>{`you have ${todos.length} todo`} </p>
