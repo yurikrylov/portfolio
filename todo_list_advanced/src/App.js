@@ -4,7 +4,7 @@ import { AiOutlinePlus } from 'react-icons/ai';
 import { useState, useEffect } from 'react';
 import { db } from './firebase.ts';
 import { query, collection, onSnapshot } from 'firebase/firestore';
-import Todo from './Components/Todo';
+import TodoElement from './Components/Todo';
 import deleteTodo from './features/deleteDoc.tsx';
 import createToDo from './features/createDoc';
 import toggleComplete from './features/updateDoc';
@@ -40,7 +40,7 @@ function App() {
         </form>
         <ul>
           {todos.map((todo, index) => (
-            <Todo
+            <TodoElement
               key={index}
               todo={todo}
               toggleComplete={toggleComplete}
