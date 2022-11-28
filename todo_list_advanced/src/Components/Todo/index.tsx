@@ -1,8 +1,11 @@
-import { FaRegTrashAlt } from 'react-icons/fa';
+import React from 'react';
+
 import Todo from '../../Types/Todo';
 import deleteTodo from '../../features/deleteDoc';
 import toggleComplete from '../../features/updateDoc';
+
 import styles from './Todo.module.css';
+import { FaRegTrashAlt } from 'react-icons/fa';
 
 type Props = {
   todo:Todo
