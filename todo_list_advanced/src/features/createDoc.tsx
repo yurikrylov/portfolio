@@ -9,7 +9,7 @@ const createToDo = async (e:Event|undefined, input:string) => {
       return
     }
     await addDoc(collection(db, 'todos'), {
-      text: input,
+      description: input,
       completed: false
     })
   }
