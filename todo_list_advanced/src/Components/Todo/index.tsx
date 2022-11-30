@@ -8,13 +8,13 @@ import styles from './Todo.module.css';
 import { FaRegTrashAlt } from 'react-icons/fa';
 
 type Props = {
-  todo:Todo
+  todo: Todo
 }
 
-const TodoElement = ( {todo}:Props ) => {
+const TodoElement = ({ todo }: Props) => {
   console.log(todo);
   return (
-    <li className={todo.completed ? 'li' : 'liComplited'}>
+    <li className={todo.completed ? styles.liComplited : styles.li}>
       <div className='row'>
         <input onChange={() => toggleComplete(todo)} type="checkbox" checked={todo.completed} />
         <p onClick={() => toggleComplete(todo)} className='text'>{todo.description}</p>
