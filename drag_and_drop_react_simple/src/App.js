@@ -9,11 +9,11 @@ function App() {
     { id: 4, order: 4, text: "Card 4" },
   ])
   const [currentCard, setCurrentCard] = useState(null)
+
   function onDragStartHandler(e, card) {
     console.log('drag', card)
     setCurrentCard(card)
   }
-
 
   function onDragEndHandler(e) {
     e.target.style.background = 'white';
