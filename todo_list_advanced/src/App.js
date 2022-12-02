@@ -1,17 +1,20 @@
 import React from 'react';
 import './App.css';
-import { AiOutlinePlus } from 'react-icons/ai';
 import { useState, useEffect } from 'react';
 import { db } from './firebase.ts';
 import { query, collection, onSnapshot } from 'firebase/firestore';
 import TodoElement from './Components/Todo';
 import createToDo from './features/createDoc';
+import {Typography, Stack, TextField} from '@mui/material'
+import {AddButton} from'./UI/Buttons'
+
 
 function App() {
   const [todos, setTodos] = useState([]);
   const [input, setInput] = useState('');
 
   const handleSubmit = (e) => {
+    console.log(1)
     createToDo(e, input);
     setInput('');
   }
@@ -31,11 +34,13 @@ function App() {
   return (
     <div className='bg'>
       <div className='container'>
-        <h3 className='heading'>Todo App</h3>
-        <form onSubmit={handleSubmit} action="" className='form'>
-          <input value={input} onChange={(e) => setInput(e.target.value)} className='inputtype="text' placeholder='Add todo' />
-          <button className='button'><AiOutlinePlus size={30} /></button>
-        </form>
+        <Typography variant='h2' gutterBottom>Todo App</Typography>
+          <Stack spacing = {2} direction={'row'}>
+          <TextField 
+          value={input} 
+          onChange={(e) => setInput(e.target.value)} />
+          <AddButton onPress={handleSubmit}/>
+          </Stack>
         <ul>
           {todos.map((todo, index) => (
             <TodoElement

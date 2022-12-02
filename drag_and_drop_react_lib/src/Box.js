@@ -38,9 +38,9 @@ export const Box = ({ name }) => {
     }),
     [name],
   )
-    Box.propTypes = {
-        name:PropTypes.string 
-    }
+  Box.propTypes = {
+    name: PropTypes.string
+  }
   return (
     <div ref={drag} style={{ ...style, opacity }}>
       {name}

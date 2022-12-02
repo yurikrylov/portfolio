@@ -5,7 +5,7 @@ type Todo = {
     description: string,
     dateOfCreation: Date,
     timeAtWork: string,
-    finishdate: Date,
+    finishDate: Date,
     priority: string,
     file: string,
     currentStatus: string,
