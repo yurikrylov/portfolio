@@ -8,7 +8,7 @@ interface Props  {
     
 }
 const handleAddClick =()=>{
-   // openModal()
+    //openModal()
 }
 const ProjectCard:React.FC<Props> = (props:Props)=>{
     return (

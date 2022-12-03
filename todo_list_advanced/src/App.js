@@ -1,10 +1,10 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { db } from './firebase.ts';
-import createToDo from './firebase/createDoc';
+import createToDo from './firebase/createElement';
 import { query, collection, onSnapshot } from 'firebase/firestore';
 
-import Task from './Components/Task';
+import Task from './Components/TaskCard';
 
 import './App.css';
 import { Typography, TextField, Paper , List} from '@mui/material'
@@ -16,7 +16,7 @@ function App() {
 
   const handleSubmit = (e) => {
     console.log(1)
-    createToDo(e, input);
+    createToDo(e, input, 'todos');
     setInput('');
   }
 
