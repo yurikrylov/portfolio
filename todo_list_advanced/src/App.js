@@ -3,11 +3,10 @@ import './App.css';
 import { useState, useEffect } from 'react';
 import { db } from './firebase.ts';
 import { query, collection, onSnapshot } from 'firebase/firestore';
-import TodoElement from './Components/Todo';
+import Task from './Components/Task';
 import createToDo from './features/createDoc';
-import {Typography, Stack, TextField} from '@mui/material'
-import {AddButton} from'./UI/Buttons'
-
+import { Typography, Stack, TextField, Paper , List} from '@mui/material'
+import { AddButton } from './UI/Buttons'
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -32,25 +31,24 @@ function App() {
   }, [])
 
   return (
-    <div className='bg'>
-      <div className='container'>
-        <Typography variant='h2' gutterBottom>Todo App</Typography>
-          <Stack spacing = {2} direction={'row'}>
-          <TextField 
-          value={input} 
+    <Paper>
+      <Typography variant='h2' gutterBottom>Todo App</Typography>
+      <Stack spacing={2} direction={'row'}>
+        <TextField
+          value={input}
+          size="small"
           onChange={(e) => setInput(e.target.value)} />
-          <AddButton onPress={handleSubmit}/>
-          </Stack>
-        <ul>
-          {todos.map((todo, index) => (
-            <TodoElement
-              key={index}
-              todo={todo}
-            />))}
-        </ul>
-        <p className='count'>{`you have ${todos.length} todo`} </p>
-      </div>
-    </div>
+        <AddButton onPress={handleSubmit} />
+      </Stack>
+      <List>
+        {todos.map((todo, index) => (
+          <Task
+            key={index}
+            todo={todo}
+          />))}
+      </List>
+      <Typography variant ="h5" >{`you have ${todos.length} todo`} </Typography>
+    </Paper>
   );
 }
 
