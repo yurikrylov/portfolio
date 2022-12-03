@@ -1,8 +1,8 @@
 import React from 'react';
 
 import Todo from '../../Types/Todo';
-import deleteTodo from '../../features/deleteDoc';
-import toggleComplete from '../../features/updateDoc';
+import deleteTodo from '../../firebase/deleteDoc';
+import toggleComplete from '../../firebase/updateDoc';
 import { RemoveButton } from '../../UI/Buttons';
 import {ListItem, Checkbox, Typography} from '@mui/material';
 import styles from './Todo.module.css';

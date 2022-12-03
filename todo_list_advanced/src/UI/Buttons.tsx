@@ -5,15 +5,16 @@ type Props = {
     onPress: () => void
 }
 
-export const AddButton = ({onPress}:Props) => {
+export const AddButton = ({ onPress }: Props) => {
     return (
-        <div>
-            <Button variant='outlined' onClick ={onPress}>Добавить задачу</Button>
-        </div>
+        <React.Fragment>
+            <Button variant='outlined' onClick={onPress}>Добавить задачу</Button>
+        </React.Fragment>
     )
 }
-export const RemoveButton =({onPress}:Props)=> {
-    return <div>
-        <Button variant ='contained' onClick ={onPress} startIcon={<DeleteIcon />} /> 
-    </div>
+export const RemoveButton = ({ onPress }: Props) => {
+    return (
+        <React.Fragment>
+            <Button variant='contained' onClick={onPress} startIcon={<DeleteIcon />} />
+        </React.Fragment>)
 }
