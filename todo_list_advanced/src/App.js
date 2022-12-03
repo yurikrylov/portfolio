@@ -36,6 +36,7 @@ function App() {
     <Paper>
       <Typography variant='h2' gutterBottom>Todo App</Typography>
       <Typography variant ="h5" >{`you have ${todos.length} todo`} </Typography>
+      <div className ="projects">
         <TextField
           value={input}
           size="small"
@@ -48,7 +49,7 @@ function App() {
             todo={todo}
           />))}
       </List>
-
+      </div>
     </Paper>
   );
 }

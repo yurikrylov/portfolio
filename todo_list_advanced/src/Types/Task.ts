@@ -1,4 +1,4 @@
-type Todo = {
+type Task = {
     id: string,
     number: number,
     header: string
@@ -11,4 +11,4 @@ type Todo = {
     currentStatus: string,
     completed: boolean
 }
-export default Todo
+export default Task

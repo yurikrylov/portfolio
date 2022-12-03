@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Todo from '../../Types/Todo';
+import Todo from '../../Types/Task';
 import deleteTodo from '../../firebase/deleteDoc';
 import toggleComplete from '../../firebase/updateDoc';
 import { RemoveButton } from '../../UI/Buttons';
