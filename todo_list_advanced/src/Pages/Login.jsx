@@ -1,7 +1,6 @@
 import React, { useCallback, useContext } from 'react';
 import { withRouter, Redirect } from "react-router";
-import {app} from "../../firebase";
-import { AuthContext } from "../../Auth";
+import { AuthContext } from "../Auth/Auth";
 import { PropTypes } from 'prop-types';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -16,6 +15,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 function Copyright(props) {
   return (
@@ -29,29 +29,37 @@ function Copyright(props) {
     </Typography>
   );
 }
-const { currentUser } = useContext(AuthContext);
 
-if (currentUser) {
-  return <Redirect to="/" />;
-}
 const theme = createTheme();
 
-const Login = ({history})=> {
-    const handleSubmit = useCallback(
-        async event => {
-          event.preventDefault();
-          const { email, password } = event.target.elements;
-          try {
-            await app
-              .auth()
-              .signInWithEmailAndPassword(email.value, password.value);
-            history.push("/");
-          } catch (error) {
+const Login = ({ history }) => {
+  const { currentUser } = useContext(AuthContext);
+
+  if (currentUser) {
+    return <Redirect to="/" />;
+  }
+  const handleSubmit = useCallback(
+    async event => {
+      event.preventDefault();
+      const { email, password } = event.target.elements;
+      try {
+        const auth = getAuth();
+        signInWithEmailAndPassword(auth, email.value, password.value)
+          .then((userCredential) => {
+            // Signed in 
+            const user = userCredential.user;
+            console.log(user)
+            // ...
+          }).catch((error) => {
             alert(error);
-          }
-        },
-        [history]
-      );
+          });
+        history.push("/");
+      } catch (error) {
+        alert(error);
+      }
+    },
+    [history]
+  );
 
   return (
     <ThemeProvider theme={theme}>
@@ -124,6 +132,6 @@ const Login = ({history})=> {
   );
 }
 Login.propTypes = {
-    history: PropTypes.any
-  }
+  history: PropTypes.any
+}
 export default withRouter(Login)

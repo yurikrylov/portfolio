@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { withRouter } from 'react-router';
-import { app } from '../../firebase';
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { PropTypes } from 'prop-types';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -38,9 +38,17 @@ const SignUp = ({ history }) => {
     const email = data.get('email');
     const password = data.get('password');
     try {
-      await app
-        .auth()
-        .createUserWithEmailAndPassword(email, password);
+      const auth = getAuth();
+      createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        console.log(user)
+        // ...
+      })
+        .catch((error) => {
+          alert(error)
+          // ..
+        });
       history.push('/');
     } catch (error) {
       alert(error)

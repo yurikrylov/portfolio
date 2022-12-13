@@ -1,16 +1,15 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { db } from './firebase.ts';
-import createToDo from './firebase/createElement';
-import { query, collection, onSnapshot } from 'firebase/firestore';
+import { db } from '../firebase';
+import createToDo from '../firebaseQueries/createElement';
+import { query, collection , onSnapshot } from 'firebase/firestore';
 
-import Task from './Components/TaskCard';
+import Task from '../components/TaskCard';
 
-import './App.css';
-import { Typography, TextField, Paper , List} from '@mui/material'
-import { AddButton } from './UI/Buttons'
+import { Typography, TextField, Paper , List} from '@mui/material';
+import { AddButton } from '../UI/Buttons';
 
-function App() {
+function Projects() {
   const [todos, setTodos] = useState([]);
   const [input, setInput] = useState('');
 
@@ -23,7 +22,7 @@ function App() {
   useEffect(() => {
     const q = query(collection(db, 'todos'))
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      let todosArr = [];
+      const todosArr = [];
       querySnapshot.forEach((doc) => {
         todosArr.push({ ...doc.data(), id: doc.id })
       })
@@ -54,4 +53,5 @@ function App() {
   );
 }
 
-export default App;
+export default Projects;
+
