@@ -1,21 +1,19 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { db } from '../firebase';
-import createToDo from '../firebaseQueries/createElement';
 import { query, collection , onSnapshot } from 'firebase/firestore';
-
-import Task from '../components/TaskCard';
-
+import createElement from '../firebaseQueries/createElement';
+import ProjectCard from '../components/ProjectCard';
+import Layout from './Layout';
 import { Typography, TextField, Paper , List} from '@mui/material';
 import { AddButton } from '../UI/Buttons';
 
 function Projects() {
-  const [todos, setTodos] = useState([]);
+  const [projects, setProjects] = useState([]);
   const [input, setInput] = useState('');
 
   const handleSubmit = (e) => {
-    console.log(1)
-    createToDo(e, input, 'todos');
+    createElement(e, input, 'projects');
     setInput('');
   }
 
@@ -26,15 +24,16 @@ function Projects() {
       querySnapshot.forEach((doc) => {
         todosArr.push({ ...doc.data(), id: doc.id })
       })
-      setTodos(todosArr)
+      setProjects(todosArr)
     })
     return () => unsubscribe()
   }, [])
 
   return (
+    <Layout>
     <Paper>
-      <Typography variant='h2' gutterBottom>Todo App</Typography>
-      <Typography variant ="h5" >{`you have ${todos.length} todo`} </Typography>
+      <Typography variant='h2' gutterBottom>Todo App Projects </Typography>
+      <Typography variant ="h5" >{`you have ${projects.length} projects`} </Typography>
       <div className ="projects">
         <TextField
           value={input}
@@ -42,14 +41,15 @@ function Projects() {
           onChange={(e) => setInput(e.target.value)} />
         <AddButton onPress={handleSubmit} />
       <List>
-        {todos.map((todo, index) => (
-          <Task
+        {projects.map((todo, index) => (
+          <ProjectCard
             key={index}
             todo={todo}
           />))}
       </List>
       </div>
     </Paper>
+    </Layout>
   );
 }
 

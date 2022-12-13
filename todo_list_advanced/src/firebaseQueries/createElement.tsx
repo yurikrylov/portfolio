@@ -1,7 +1,7 @@
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '../firebase';
 
-const createToDo = async (e:Event|undefined, input:string, type:string) => {
+const createElement = async (e:Event|undefined, input:string, type:string) => {
    if (e===undefined){return}
    e.preventDefault()
     if (input === '') {
@@ -13,4 +13,4 @@ const createToDo = async (e:Event|undefined, input:string, type:string) => {
       completed: false
     })
   }
-  export default createToDo
+  export default createElement
