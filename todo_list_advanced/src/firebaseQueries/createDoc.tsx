@@ -1,7 +1,7 @@
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '../firebase';
 
-const createElement = async (e: Event | undefined, input: string, type: string) => {
+const createDocument = async (e: Event | undefined, input: string, type: string) => {
   if (e === undefined) { return }
   e.preventDefault()
   if (input === '') {
@@ -20,4 +20,4 @@ const createElement = async (e: Event | undefined, input: string, type: string) 
     })
   }
 }
-export default createElement
+export default createDocument

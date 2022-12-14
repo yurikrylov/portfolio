@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete'
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 type Props = {
     onPress: () => void,
     type?: string
@@ -9,20 +10,20 @@ type Props = {
 export const AddButton = ({ onPress, type }: Props) => {
     return (
         <React.Fragment>
-            <Button variant='outlined' onClick={onPress}>Добавить {type}</Button>
+            <Button variant='text' onClick={onPress}>Добавить {type}</Button>
         </React.Fragment>
     )
 }
 export const RemoveButton = ({ onPress }: Props) => {
     return (
         <React.Fragment>
-            <Button variant='contained' onClick={onPress} startIcon={<DeleteIcon />} />
+            <Button variant='text' onClick={onPress} startIcon={<DeleteIcon />} />
         </React.Fragment>)
 }
 export const EditProjectButton = ({ onPress }: Props)=>{
     return (
         <React.Fragment>
-            <Button variant='outlined' onClick={onPress}>Редактировать</Button>
+            <Button variant='text' onClick={onPress} startIcon={<EditOutlinedIcon /> } />
         </React.Fragment>
     )
 }

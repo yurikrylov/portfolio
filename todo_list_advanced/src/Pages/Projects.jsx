@@ -2,10 +2,10 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { db } from '../firebase';
 import { query, collection, onSnapshot } from 'firebase/firestore';
-import createElement from '../firebaseQueries/createElement';
+import createDocument from '../firebaseQueries/createDoc';
 import ProjectCard from '../components/ProjectCard';
 import Layout from './Layout';
-import { Typography, TextField, Paper, List } from '@mui/material';
+import { Typography, TextField, List } from '@mui/material';
 import { AddButton } from '../UI/Buttons';
 
 function Projects() {
@@ -13,25 +13,26 @@ function Projects() {
   const [input, setInput] = useState('');
 
   const handleSubmit = (e) => {
-    createElement(e, input, 'projects');
+    createDocument(e, input, 'projects');
     setInput('');
   }
-
+    let i = 1;
   useEffect(() => {
+    console.log('changed'+i);
+    i++;
     const q = query(collection(db, 'projects'))
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const projectsArr = [];
       querySnapshot.forEach((doc) => {
         projectsArr.push({ ...doc.data(), id: doc.id })
       })
-      setProjects(projectsArr)
+      setProjects(()=>[...projectsArr])
     })
     return () => unsubscribe()
   }, [])
 
   return (
     <Layout>
-      <Paper>
         <Typography variant='h2' gutterBottom>Todo App Projects </Typography>
         <Typography variant="h5" >{`you have ${projects.length} projects`} </Typography>
         <div className="projects">
@@ -48,7 +49,6 @@ function Projects() {
               />))}
           </List>
         </div>
-      </Paper>
     </Layout>
   );
 }
