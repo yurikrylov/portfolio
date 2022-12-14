@@ -24,7 +24,7 @@ function App() {
   }
 
   function dropCardHandler(e, board) {
-    console.log(e);
+    //console.log(e);
     board.items.push(currentItem)
     const currentIndex = currentBoard.items.indexOf(currentItem);
     currentBoard.items.splice(currentIndex, 1);

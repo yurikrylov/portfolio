@@ -11,7 +11,7 @@ function App() {
   const [currentCard, setCurrentCard] = useState(null)
 
   function onDragStartHandler(e, card) {
-    console.log('drag', card)
+    //console.log('drag', card)
     setCurrentCard(card)
   }
 
@@ -34,7 +34,7 @@ function App() {
       }
       return c
     }))
-    console.log('drop', card)
+    //console.log('drop', card)
     e.target.style.background = 'white';
 
   }

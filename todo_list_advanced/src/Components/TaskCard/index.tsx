@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Todo from '../../Types/Task';
-import deleteTodo from '../../firebaseQueries/deleteDoc';
+import deleteDocument from '../../firebaseQueries/deleteDoc';
 import toggleComplete from '../../firebaseQueries/updateDoc';
 import { RemoveButton } from '../../UI/Buttons';
 
@@ -14,9 +14,6 @@ type Props = {
 }
 
 const Task = ({ todo }: Props) => {
-
-
- 
   return (
     <ListItem className={todo.completed ? styles.liComplited : styles.li}>
       <Checkbox onChange={() => toggleComplete(todo)} checked={todo.completed} />
@@ -28,7 +25,7 @@ const Task = ({ todo }: Props) => {
         onClick={() => toggleComplete(todo)}>{todo.description}</Typography>
 
 
-      <RemoveButton onPress={() => { deleteTodo(todo.id) }} />
+      <RemoveButton onPress={() => { deleteDocument(todo.id, 'tasks') }} />
     </ListItem>
   )
 }

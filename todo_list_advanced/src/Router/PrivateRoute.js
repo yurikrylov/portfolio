@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 const PrivateRoute = ({ component: RouteComponent, ...rest }) => {
     const { currentUser } = useContext(AuthContext);
+   // console.log(currentUser)
     return (
         <Route
             {...rest}

@@ -1,21 +1,24 @@
-import { Button, Paper, Typography } from "@mui/material";
+import { Paper, Typography } from "@mui/material";
 import React from "react";
 import Project from '../../Types/Project';
-import {AddButton} from '../../UI/Buttons'
+import {EditProjectButton} from '../../UI/Buttons';
+import { RemoveButton } from '../../UI/Buttons';
+import deleteDocument from '../../firebaseQueries/deleteDoc';
+
 interface Props  {
     key:number,
     project:Project
-    
 }
-const handleAddClick =()=>{
+
+const handleEditClick =()=>{
    // openModal()
 }
 const ProjectCard:React.FC<Props> = (props:Props)=>{
     return (
         <Paper>
             <Typography> {props.project.name}</Typography>
-            <AddButton onPress={handleAddClick}></AddButton>
-
+            <EditProjectButton onPress={handleEditClick}></EditProjectButton>
+            <RemoveButton onPress={() => { deleteDocument(props.project.id, 'projects') }} />
         </Paper>
 
     )

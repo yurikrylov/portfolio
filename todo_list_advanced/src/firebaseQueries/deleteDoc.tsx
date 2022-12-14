@@ -1,7 +1,7 @@
 import { doc, deleteDoc } from 'firebase/firestore';
 import { db } from '../firebase';
 
-const deleteTodo = async (id: string) => {
-    await deleteDoc(doc(db, 'todos', id))
+const deleteDocument = async (id: string, type: string) => {
+    await deleteDoc(doc(db, type, id))
 }
-export default deleteTodo
+export default deleteDocument
