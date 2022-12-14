@@ -1,8 +1,15 @@
 import React from 'react'
+import Paper from '@mui/material/Paper';
+import { Typography } from '@mui/material';
+type Props = {
+  page: string
+}
 
-function Header() {
+function Header(props: Props) {
   return (
-    <div>index</div>
+    <Paper >
+      <Typography variant='h5' align='center' gutterBottom>{props.page == 'projects' ? 'Проекты' : 'Задачи'}</Typography>
+    </Paper>
   )
 }
 
