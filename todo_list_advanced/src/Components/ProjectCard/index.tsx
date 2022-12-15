@@ -8,17 +8,21 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import Checkbox from '@mui/material/Checkbox';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
+import ProjectCardModal from '../ProjectCardModal';
 
 interface Props {
-    key: number,
-    project: Project
+  project: Project
 }
 
-const handleEditClick = () => {
-    // openModal()
-}
+
 const ProjectCard: React.FC<Props> = (props: Props) => {
-    const [checked, setChecked] = React.useState([0]);
+  const [checked, setChecked] = React.useState([0]);
+  const [show, setShow] = React.useState(false);
+  const container = React.useRef(null);
+  
+  const handleEditClick = () => {
+    setShow(!show);
+  }
 
   const handleToggle = (value: number) => () => {
     const currentIndex = checked.indexOf(value);
@@ -30,33 +34,34 @@ const ProjectCard: React.FC<Props> = (props: Props) => {
       newChecked.splice(currentIndex, 1);
     }
 
-    setChecked(newChecked);
+    setChecked(newChecked)
   };
-  const labelId = `checkbox-list-label-${props.key}`;
-    return (
-        <ListItem
-            key={props.key}
-            secondaryAction={<RemoveButton onPress={() => { deleteDocument(props.project.id, 'projects') }} />}
-            disablePadding
-        >
-                        <ListItemButton role={undefined} onClick={handleToggle(props.key)} dense>
+  
+  return (
+    <ListItem
+      secondaryAction={<RemoveButton onPress={() => { deleteDocument(props.project.id, 'projects') }} />}
+      disablePadding
+    >
+      <ListItemButton >
 
-            <ListItemIcon>
-                <Checkbox
-                    edge="start"
-                    checked={checked.indexOf(props.key) !== -1}
-                    tabIndex={-1}
-                    disableRipple
-                    inputProps={{ 'aria-labelledby': labelId }}
-                />
-            </ListItemIcon>
-            <ListItemText> {props.project.name}</ListItemText>
-            <EditProjectButton onPress={handleEditClick}></EditProjectButton>
-            </ListItemButton>
+        <ListItemIcon>
+          <Checkbox
+            edge="start"
+            checked={true}
+            tabIndex={-1}
+            disableRipple
+            
+          />
+        </ListItemIcon>
+        <ListItemText> {props.project.name}</ListItemText>
+        <EditProjectButton onPress={handleEditClick}></EditProjectButton>
+      </ListItemButton>
+      {show ? (
+        <ProjectCardModal />
+      ) : null}
+    </ListItem>
 
-        </ListItem>
-
-    )
+  )
 }
 
 export default ProjectCard
