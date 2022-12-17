@@ -17,7 +17,8 @@ function Projects() {
   const [input, setInput] = useState('');
 
   const handleSubmit = (e) => {
-    createDocument(e, input, 'projects');
+    e.preventDefault();
+    createDocument(input, 'projects');
     setInput('');
   }
   useEffect(() => {

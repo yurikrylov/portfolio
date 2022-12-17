@@ -1,23 +1,28 @@
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '../firebase';
 
-const createDocument = async (e: Event | undefined, input: string, type: string) => {
-  if (e === undefined) { return }
-  e.preventDefault()
-  if (input === '') {
+const createDocument = async (input: string, type: string) => {
+  if (!input) {
     alert('input some input')
     return
   }
-  if (type == 'projects') {
-    await addDoc(collection(db, type), {
-      name: input
-    })
+  let docFields = {}
+  switch (type) {
+    case 'projects':
+      docFields = {
+        name: input
+      }
+      break
+    case 'tasks':
+      docFields = {
+        description: input,
+        completed: false
+      }
+      break
+    default:
+      alert ('sorry, wrong number!')
+      return
   }
-  if (type == 'tasks') {
-    await addDoc(collection(db, type), {
-      description: input,
-      completed: false
-    })
-  }
+  await addDoc(collection(db, type), docFields)
 }
 export default createDocument
