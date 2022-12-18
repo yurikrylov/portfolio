@@ -1,6 +1,6 @@
 type Task = {
     id: string,
-    number?: number,
+    number?: string,
     name?: string,
     completed: boolean
 }
