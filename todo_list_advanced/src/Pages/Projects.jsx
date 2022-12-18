@@ -24,11 +24,11 @@ function Projects() {
   useEffect(() => {
     const q = query(collection(db, 'projects'))
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      const projectsArr = [];
+      const list = [];
       querySnapshot.forEach((doc) => {
-        projectsArr.push({ ...doc.data(), id: doc.id })
+        list.push({ ...doc.data(), id: doc.id })
       })
-      setProjects(() => [...projectsArr])
+      setProjects(() => [...list])
     })
     return () => unsubscribe()
   }, [])

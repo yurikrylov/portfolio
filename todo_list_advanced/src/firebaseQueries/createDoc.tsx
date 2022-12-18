@@ -10,7 +10,8 @@ const createDocument = async (input: string, type: string) => {
   switch (type) {
     case 'projects':
       docFields = {
-        name: input
+        name: input,
+        completed: false
       }
       break
     case 'tasks':
@@ -20,7 +21,7 @@ const createDocument = async (input: string, type: string) => {
       }
       break
     default:
-      alert ('sorry, wrong number!')
+      alert('sorry, wrong number!')
       return
   }
   await addDoc(collection(db, type), docFields)

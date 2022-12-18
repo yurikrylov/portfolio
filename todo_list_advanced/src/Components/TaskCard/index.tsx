@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Todo from '../../Types/Task';
 import deleteDocument from '../../firebaseQueries/deleteDoc';
 import updateDocument from '../../firebaseQueries/updateDoc';
 import { RemoveButton } from '../../UI/Buttons';
-
 
 import { ListItem, Checkbox, Typography } from '@mui/material';
 import styles from './TaskCard.module.css';
@@ -14,18 +13,24 @@ type Props = {
 }
 
 const Task = ({ todo }: Props) => {
+  const [checked, setChecked] = useState(todo.completed)
+  const handleCheckBoxClick = () => {
+    updateDocument(todo.id, 'tasks', { checked: !todo.completed, ...todo })
+    setChecked(!checked)
+  }
+  const handleRemoveButtonOnPress = () => {
+    deleteDocument(todo.id, 'tasks')
+  }
   return (
     <ListItem className={todo.completed ? styles.liComplited : styles.li}>
-      <Checkbox onChange={() => updateDocument(todo, 'tasks')} checked={todo.completed} />
+      <Checkbox onChange={handleCheckBoxClick} checked={checked} />
       <Typography
         variant="body1"
         gutterBottom
         align="left"
         width="30%"
-        onClick={() => updateDocument(todo, 'tasks')}>{todo.description}</Typography>
-
-
-      <RemoveButton onPress={() => { deleteDocument(todo.id, 'tasks') }} />
+        onClick={handleCheckBoxClick}>{todo.description}</Typography>
+      <RemoveButton onPress={handleRemoveButtonOnPress} />
     </ListItem>
   )
 }
